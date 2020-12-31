@@ -1,3 +1,4 @@
-env
+.vscode/
 env/
-.vscode
+dump.json
+dump_short.json

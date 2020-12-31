@@ -31,26 +31,55 @@ def generic_scan(scan_str, scan_flags):
         print(message, "(all ports)")
         scanner.scan(ip_addr, '0-65535', scan_flags)
     
-    # scaninfo() probably not being used, leave in for now "in case"
+    # functions to see what information is available when you try ...
+    # print("\nscanner.scaninfo() generates:")
     # print(scanner.scaninfo())
+    # print("\nscanner.scanstats() generates:")
+    # print(scanner.scanstats())
+    # print("\nscanner[ip_addr] generates:")
+    # print(scanner[ip_addr])
 
     # report the state
-    ip_state = scanner[ip_addr].state()
+    ip_state = scanner[ip_addr].state()    
     print("\nIP Status: %s" % ip_state.title() )
 
     # if IP address is up ...
     if  ip_state == "up":
-        protocols = scanner[ip_addr].all_protocols()
-        # print(scanner[ip_addr].all_protocols())
+        ip_report = scanner[ip_addr]
 
+        # if comprehensive display the OS
+        if int(resp) >= 5:
+            print("OS: %s" % ip_report["osmatch"][0]["name"])
+
+        protocols = ip_report.all_protocols()
         # for each protocol that has been checked, print the list of open ports
         for protocol in protocols:
-            print("Open Ports (%s):" % protocol.upper(), scanner[ip_addr][protocol].keys(), "\n")
+            print("Open Ports (%s):" % protocol.upper())
+            for port in ip_report[protocol]:
+                s = "  %s %d%s " % (protocol.upper(), port, " " * (5 - len(str(port))))
+                s = s + ip_report[protocol][port]['name']
+                if ip_report[protocol][port]['product'] != "":
+                    s = s + " (%s)" % ip_report[protocol][port]['product']
+                print(s)
+    
+    print("\nScan complete in %s seconds\n" % scanner.scanstats()['elapsed'])
 
 # SYN ACK Scan - convenience method
 def syn_ack_scan():
     scan_str = "SYN ACK"
     scan_flags = "-v -sS"
+    generic_scan(scan_str, scan_flags)
+
+# UDP Scan - convenience method
+def udp_scan():
+    scan_str = "UDP"
+    scan_flags = "-v -sU"
+    generic_scan(scan_str, scan_flags)
+
+# Comprehensive Scan - convenience method
+def comp_scan():
+    scan_str = "comprehensive"
+    scan_flags = "-v -sS -sV -sC -A -O"
     generic_scan(scan_str, scan_flags)
 
 # welcome message
@@ -74,9 +103,9 @@ if validateIP(ip_addr):
     if resp == '1' or resp == '2':
         syn_ack_scan()
     elif resp == '3' or resp == '4':
-        print("\nTo be written\n")
+        udp_scan()
     elif resp == '5' or resp == '6':
-        print("\nTo be written\n")
+        comp_scan()
     else:
         print("\nInvalid choice\n")
 
