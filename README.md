@@ -2,7 +2,7 @@
 
 This repository implements the tools described in HackerSploit's '[Python
 3 for Pentesting](https://www.youtube.com/watch?v=UadqiHXfvsg&list=PLBf0hzazHTGM_dncTqO9l-0zUQYP0nNPU)'
-course. Parts of that course are also on the FreecodeCamp syllabus.
+course. Parts of that course are also used in the FreecodeCamp syllabus.
 
 But to add a wrinkle, and learn/reinforce another new skill, I am also going to try to
 'Docker-ise' everything.
@@ -12,18 +12,19 @@ But to add a wrinkle, and learn/reinforce another new skill, I am also going to 
 
 **[Included Tools](#included-tools)**
 * **[TCP Server and Client](#tcp-server-and-client)**
-  * [TCPserver](#1.-tcpserver)
-  * [TCPclient](#2.-tcpclient)
+  * [TCPserver](#1%2E-tcpserver)
+  * [TCPclient](#2%2E-tcpclient)
   * [Example - Running Docker-ised](#example---running-docker-ised)
   * [Example - Docker-ised server](#example---docker-ised-server)
 * **[Scanner](#scanner)**
+  * [Running Docker-ised](#running-docker-ised)
   * [Running Locally](#running-locally)
 
 **[Notes](#notes)**
 
 ## Building the Docker image
 
-*The image will evenutally be available on Docker Hub as* `domwakeling/pen-test`.
+*The image will eventually be available on Docker Hub as* `domwakeling/pen-test`.
 
 To build the Docker image, you need to be at the root file of the code (the one where the `Dockerfile`
 sits), **not** at the `src` folder.
@@ -74,15 +75,25 @@ You should see connection messages in both the server and client windows.
 1. Open a second terminal and navigate to the `src` folder on your computer
 1. In the second terminal use `python3 TCPclient.py`
 
-We have mapped port 444 between the Docker container and the local computer, so connection messages will show up.
+This will work because we've mapped port 444 between the Docker container and the host.
 
 ### Scanner
 
-#### Running locally
+#### Running Docker-ised
+
+You can either:
+1. Run the image in terminal mode using `docker run -it pen-test`
+1. At the terminal, run `./scanner.py` or `python3 scanner.py`
+
+Or you can run the scanner directly from the image using `docker run -it pen-test python3 scanner.py`
+
+#### Running Locally
 
 If you are going to run the port-scanner locally, you will need to:
-1. install python modules with `pip3 install -r requirements.txt`
-1. install `nmap` using `apt install nmap` (or whatever package manager you use)
+1. Install python modules with `pip3 install -r requirements.txt`
+1. Install `nmap` using `apt install nmap` (or whatever package manager you use)
+
+You may have permission issues with the scanner, in which case you can `sudo` the `scanner.py`. If you are using a virtual environment `sudo` to your virtual python3.
 
 ---
 
@@ -92,6 +103,7 @@ If you are going to run the port-scanner locally, you will need to:
   image size
 * Written on a Raspberry Pi 4 running Raspbian (Buster, 32bit), but system-agnostic. (Have had
   issues following other tutorials where images assume an AMD64 system!)
+* README checked with [Hemingway editor](http://www.hemingwayapp.com/) for readibility!
 
 
 ---
