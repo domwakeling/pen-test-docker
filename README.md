@@ -18,13 +18,13 @@ But to add a wrinkle, and learn/reinforce another new skill, I am also going to 
   * [Example - Docker-ised server](#example---docker-ised-server)
 * **[Scanner](#scanner)**
   * [Running Docker-ised](#running-docker-ised)
-  * [Running Locally](#running-locally)
+  * [Running On Local Host](#running-on-local-host)
 
 **[Notes](#notes)**
 
 ## Building the Docker image
 
-*The image will eventually be available on Docker Hub as* `domwakeling/pen-test`.
+*The image will be available on Docker Hub as* `domwakeling/pen-test`.
 
 To build the Docker image, you need to be at the root file of the code (the one where the `Dockerfile`
 sits), **not** at the `src` folder.
@@ -85,11 +85,11 @@ You can either:
 1. Run the image in terminal mode using `docker run -it pen-test`
 1. At the terminal, run `./scanner.py` or `python3 scanner.py`
 
-Or you can run the scanner directly from the image using `docker run -it pen-test python3 scanner.py`
+Or you can run the scanner direct from the image using `docker run -it pen-test python3 scanner.py`
 
-#### Running Locally
+#### Running On Local Host
 
-If you are going to run the port-scanner locally, you will need to:
+If you are going to run the port-scanner on your local computer, you will need to:
 1. Install python modules with `pip3 install -r requirements.txt`
 1. Install `nmap` using `apt install nmap` (or whatever package manager you use)
 
@@ -103,7 +103,7 @@ You may have permission issues with the scanner, in which case you can `sudo` th
   image size
 * Written on a Raspberry Pi 4 running Raspbian (Buster, 32bit), but system-agnostic. (Have had
   issues following other tutorials where images assume an AMD64 system!)
-* README checked with [Hemingway editor](http://www.hemingwayapp.com/) for readibility!
+* README checked with [Hemingway editor](http://www.hemingwayapp.com/) for readability!
 
 
 ---
