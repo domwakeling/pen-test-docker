@@ -12,8 +12,8 @@ But to add a wrinkle, and learn/reinforce another new skill, I am also going to 
 
 **[Included Tools](#included-tools)**
 * **[TCP Server and Client](#tcp-server-and-client)**
-  * [TCPserver](#1%2E-tcpserver)
-  * [TCPclient](#2%2E-tcpclient)
+  * [TCPserver](#tcpserver)
+  * [TCPclient](#tcpclient)
   * [Example - Running Docker-ised](#example---running-docker-ised)
   * [Example - Docker-ised server](#example---docker-ised-server)
 * **[Scanner](#scanner)**
@@ -24,7 +24,7 @@ But to add a wrinkle, and learn/reinforce another new skill, I am also going to 
 
 ## Building the Docker image
 
-*The image will be available on Docker Hub as* `domwakeling/pen-test`.
+*The image is available on Docker Hub as* `domwakeling/pen-test`.
 
 To build the Docker image, you need to be at the root file of the code (the one where the `Dockerfile`
 sits), **not** at the `src` folder.
@@ -45,12 +45,12 @@ The image is set to open in a bash shell, so to start it you can use:
 
 Getting to grips with the basics of networks and sockets.
 
-#### 1. TCPserver
+#### TCPserver
 
 Opens a simple TCP server on port 444 of the host. On receiving a connection, prints the incoming
 address and returns a welcome message. May need to use `sudo` on local computer for port permissions.
 
-#### 2. TCPclient
+#### TCPclient
 
 Opens a TCP client and connects to port 444 of the host. Receives any message and closes again.
 
@@ -103,6 +103,8 @@ You may have permission issues with the scanner, in which case you can `sudo` th
   image size
 * Written on a Raspberry Pi 4 running Raspbian (Buster, 32bit), but system-agnostic. (Have had
   issues following other tutorials where images assume an AMD64 system!)
+* More intrusive (comprehensive) scanning was failing in Docker. Discovered that Alpine needs
+  `nmap-scrips` installing alongside `nmap` 
 * README checked with [Hemingway editor](http://www.hemingwayapp.com/) for readability!
 
 

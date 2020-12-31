@@ -24,12 +24,14 @@ def generic_scan(scan_str, scan_flags):
     # message to confirm scan is starting
     print("\nnmap version: %d.%d" % (scanner.nmap_version()))
     message = "Carrying out " + scan_str + " scan on IP address " + ip_addr
-    if int(resp) % 2 == 1:
+    if int(resp) % 3 == 1:
         print(message, "(common ports only)")
         scanner.scan(ip_addr, '0-1023', scan_flags)
-    else:
+    elif int(resp) % 3 == 2:
         print(message, "(all ports)")
         scanner.scan(ip_addr, '0-65535', scan_flags)
+    else:
+        print("This code to be written")
     
     # functions to see what information is available when you try ...
     # print("\nscanner.scaninfo() generates:")
@@ -47,17 +49,22 @@ def generic_scan(scan_str, scan_flags):
     if  ip_state == "up":
         ip_report = scanner[ip_addr]
 
-        # if comprehensive display the OS
-        if int(resp) >= 5:
-            print("OS: %s" % ip_report["osmatch"][0]["name"])
+        # if comprehensive, attempt display the OS (won't work on a website)
+        if int(resp) >= 7:
+            try:
+                print("OS: %s" % ip_report["osmatch"][0]["name"])
+            except:
+                print(ip_report)
 
         protocols = ip_report.all_protocols()
         # for each protocol that has been checked, print the list of open ports
         for protocol in protocols:
-            print("Open Ports (%s):" % protocol.upper())
+            print("\nOpen Ports (%s):" % protocol.upper())
             for port in ip_report[protocol]:
+                # formatted string with protocol, port (5-space aligned) and name
                 s = "  %s %d%s " % (protocol.upper(), port, " " * (5 - len(str(port))))
                 s = s + ip_report[protocol][port]['name']
+                # add the product info if we have it
                 if ip_report[protocol][port]['product'] != "":
                     s = s + " (%s)" % ip_report[protocol][port]['product']
                 print(s)
@@ -83,8 +90,8 @@ def comp_scan():
     generic_scan(scan_str, scan_flags)
 
 # welcome message
-print("\nWelcome, this is a simple nmap automation tool")
-print("==============================================\n")
+print("\nPort Scanner : A simple nmap automation tool")
+print("============================================\n")
 
 # get the IP address
 ip_addr = input("Please enter the IP address you want to scan: ")
@@ -94,17 +101,20 @@ if validateIP(ip_addr):
     resp = input("""\nPlease enter the type of scan you want to run
     1) SYN ACK Scan - common ports
     2) SYN ACK Scan - all ports
-    3) UDP Scan - common ports
-    4) UDP Scan - all ports
-    5) Comprehensive Scan - common ports
-    6) Comprehensive Scan - all ports\n
+    3) SYN ACK Scan - specify ports
+    4) UDP Scan - common ports
+    5) UDP Scan - all ports
+    6) UDP Scan - specify ports
+    7) Comprehensive Scan - common ports
+    8) Comprehensive Scan - all ports
+    9) Comprehensive Scan - specify ports\n
     Your choice: """)
     
     if resp == '1' or resp == '2':
         syn_ack_scan()
-    elif resp == '3' or resp == '4':
+    elif resp == '4' or resp == '5':
         udp_scan()
-    elif resp == '5' or resp == '6':
+    elif resp == '7' or resp == '8':
         comp_scan()
     else:
         print("\nInvalid choice\n")
