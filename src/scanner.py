@@ -54,7 +54,7 @@ def generic_scan(scan_str, scan_flags):
             try:
                 print("OS: %s" % ip_report["osmatch"][0]["name"])
             except:
-                print(ip_report)
+                print("Unable to determine OS")
 
         protocols = ip_report.all_protocols()
         # for each protocol that has been checked, print the list of open ports

@@ -93,7 +93,8 @@ If you are going to run the port-scanner on your local computer, you will need t
 1. Install python modules with `pip3 install -r requirements.txt`
 1. Install `nmap` using `apt install nmap` (or whatever package manager you use)
 
-You may have permission issues with the scanner, in which case you can `sudo` the `scanner.py`. If you are using a virtual environment `sudo` to your virtual python3.
+You may have permission issues with the scanner, in which case you can `sudo` the `scanner.py`. If
+you are using a virtual environment `sudo` to your virtual python3.
 
 ---
 
@@ -106,7 +107,6 @@ You may have permission issues with the scanner, in which case you can `sudo` th
 * More intrusive (comprehensive) scanning was failing in Docker. Discovered that Alpine needs
   `nmap-scrips` installing alongside `nmap` 
 * README checked with [Hemingway editor](http://www.hemingwayapp.com/) for readability!
-
 
 ---
 
