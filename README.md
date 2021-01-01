@@ -24,7 +24,7 @@ But to add a wrinkle, and learn/reinforce another new skill, I am also going to 
 
 ## Building the Docker image
 
-*The image is available on Docker Hub as* `domwakeling/pen-test`.
+*The image is [available on Docker Hub](https://hub.docker.com/repository/docker/domwakeling/pen-test) as* `domwakeling/pen-test`.
 
 To build the Docker image, you need to be at the root file of the code (the one where the `Dockerfile`
 sits), **not** at the `src` folder.
