@@ -8,6 +8,8 @@ But to add a wrinkle, and learn/reinforce another new skill, I am also going to 
 'Docker-ise' everything.
 
 ## Index
+**[Makefile](#makefile)**
+
 **[Building the Docker image](#building-the-docker-image)**
 
 **[Included Tools](#included-tools)**
@@ -21,6 +23,12 @@ But to add a wrinkle, and learn/reinforce another new skill, I am also going to 
   * [Running On Local Host](#running-on-local-host)
 
 **[Notes](#notes)**
+
+## Makefile
+
+A self-documenting `Makefile` is included (thanks to Victoria Drake for
+[this article](https://victoria.dev/blog/how-to-create-a-self-documenting-makefile/)). To see the
+available commands, run `make` or `make help` from the same directory as the `Makefile` and `Dockerfile`.
 
 ## Building the Docker image
 
