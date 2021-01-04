@@ -31,7 +31,8 @@ def generic_scan(scan_str, scan_flags):
         print(message, "(all ports)")
         scanner.scan(ip_addr, '0-65535', scan_flags)
     else:
-        print("This code to be written")
+        print(message, "(custom ports, %s-%s)" % (port_low, port_high))
+        scanner.scan(ip_addr, f"{port_low}-{port_high}", scan_flags)
     
     # functions to see what information is available when you try ...
     # print("\nscanner.scaninfo() generates:")
@@ -98,6 +99,8 @@ ip_addr = input("Please enter the IP address you want to scan: ")
 
 # if valid, check for scan type
 if validateIP(ip_addr):
+    port_low = 0
+    port_high = 0
     resp = input("""\nPlease enter the type of scan you want to run
     1) SYN ACK Scan - common ports
     2) SYN ACK Scan - all ports
@@ -116,6 +119,15 @@ if validateIP(ip_addr):
         udp_scan()
     elif resp == '7' or resp == '8':
         comp_scan()
+    elif resp == '3' or resp == '6' or resp == '9':
+        port_low = input("Please enter the first port to scan: ")
+        port_high = input("Please enter the last port to scan: ")
+        if resp == '3':
+            syn_ack_scan()
+        elif resp == '6':
+            udp_scan()
+        else:
+            comp_scan()
     else:
         print("\nInvalid choice\n")
 
