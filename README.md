@@ -4,8 +4,8 @@ This repository implements the tools described in HackerSploit's '[Python
 3 for Pentesting](https://www.youtube.com/watch?v=UadqiHXfvsg&list=PLBf0hzazHTGM_dncTqO9l-0zUQYP0nNPU)'
 course. Parts of that course are also used in the FreecodeCamp syllabus.
 
-But to add a wrinkle, and learn/reinforce another new skill, I am also going to try to
-'Docker-ise' everything.
+But to add a wrinkle, and learn/reinforce another new skill, I have also
+'Docker-ised' everything.
 
 ## Index
 **[Makefile](#makefile)**
@@ -32,7 +32,7 @@ available commands, run `make` or `make help` from the same directory as the `Ma
 
 ## Building the Docker image
 
-*The image is [available on Docker Hub](https://hub.docker.com/repository/docker/domwakeling/pen-test) as* `domwakeling/pen-test`.
+*The image is [available on Docker Hub](https://hub.docker.com/repository/docker/domwakeling/pen-test) as* `domwakeling/pen-test`*. Note this is an ARMv7 build only.*
 
 To build the Docker image, you need to be at the root file of the code (the one where the `Dockerfile`
 sits), **not** at the `src` folder.
